@@ -26,6 +26,11 @@ class ProductService {
         const response = await this.api.get<string[]>('/category-list');
         return response.data;
     }
+
+    async getProductById(id: number | string): Promise<Product>{
+        const response = await this.api.get<Product>(`/${id}`);
+        return response.data;
+    }
 }
 
 export default new ProductService();
