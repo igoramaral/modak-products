@@ -1,8 +1,9 @@
 import Colors from '@/constants/Colors';
 import { Product } from '@/src/types/product';
 import { getStarIcons } from '@/src/util/getStarIcons';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ProductPrice from '../ProductPrice';
 
 interface ProductCardProps {
@@ -12,26 +13,30 @@ interface ProductCardProps {
 
 export default function ProductCard({item, viewMode}:ProductCardProps) {
     const cardStyle = viewMode === 'grid' ? styles.gridCard : styles.listCard;
+    const router = useRouter();
 
     return (
-        <View style={cardStyle}>
-            <Image
-                source={{ uri: item.thumbnail }}
-                style={styles.thumbnail}
-            />
-            <View>
-                <Text style={styles.productTitle}>
-                    {item.title}
-                </Text>
-                <View style={styles.ratingContainer}>
-                    <Text>{getStarIcons(item.rating)}</Text>
-                    <Text style={styles.ratingText}>({item.rating})</Text>
+        <View>
+            <TouchableOpacity style={cardStyle} onPress={() => router.push(`/${item.id}`)}>
+                <Image
+                    source={{ uri: item.thumbnail }}
+                    style={styles.thumbnail}
+                />
+                <View>
+                    <Text style={styles.productTitle}>
+                        {item.title}
+                    </Text>
+                    <View style={styles.ratingContainer}>
+                        <Text>{getStarIcons(item.rating)}</Text>
+                        <Text style={styles.ratingText}>({item.rating})</Text>
+                    </View>
+                    
+                    <ProductPrice value={item.price} />
+                    
                 </View>
-                
-                <ProductPrice value={item.price} />
-                
-            </View>
+            </TouchableOpacity>
         </View>
+        
     );
 }
 
