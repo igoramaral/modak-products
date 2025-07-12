@@ -4,10 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 interface ProductPriceProps {
     value: number;
     currency?: string;
-    locale?: string
+    locale?: string,
+    smallerFontSize?: number;
+    biggerFontSize?: number;
 }
 
-export default function ProductPrice({ value, currency = "$", locale = 'en-US' }: ProductPriceProps) {
+export default function ProductPrice({ value, currency = "$", locale = 'en-US', smallerFontSize = 16, biggerFontSize = 26 }: ProductPriceProps) {
     const [intPart, fracPart] = value.toFixed(2).split(".");
 
     const intPartFormatted = new Intl.NumberFormat(locale, {
@@ -16,9 +18,9 @@ export default function ProductPrice({ value, currency = "$", locale = 'en-US' }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.currency}>{currency}</Text>
-            <Text style={styles.integer}>{intPartFormatted}</Text>
-            <Text style={styles.fraction}>,{fracPart}</Text>
+            <Text style={[styles.currency, {fontSize: smallerFontSize}]}>{currency}</Text>
+            <Text style={[styles.integer, {fontSize: biggerFontSize}]}>{intPartFormatted}</Text>
+            <Text style={[styles.fraction, {fontSize: smallerFontSize}]}>,{fracPart}</Text>
         </View>
     );
 }
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
     },
     fraction: {
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: "500",
         marginTop: 4,
     },
