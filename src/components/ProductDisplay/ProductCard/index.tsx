@@ -1,10 +1,10 @@
 import Colors from '@/constants/Colors';
 import { Product } from '@/src/types/product';
-import { getStarIcons } from '@/src/util/getStarIcons';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ProductPrice from '../ProductPrice';
+import ProductRating from '../ProductRating';
 
 interface ProductCardProps {
     item: Product;
@@ -26,10 +26,8 @@ export default function ProductCard({item, viewMode}:ProductCardProps) {
                     <Text style={styles.productTitle}>
                         {item.title}
                     </Text>
-                    <View style={styles.ratingContainer}>
-                        <Text>{getStarIcons(item.rating)}</Text>
-                        <Text style={styles.ratingText}>({item.rating})</Text>
-                    </View>
+                    
+                    <ProductRating rating={item.rating} />
                     
                     <ProductPrice value={item.price} />
                     
@@ -70,13 +68,5 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         marginVertical: 5,
         color: Colors.blackText
-    },
-    ratingContainer: {
-        flexDirection: 'row',
-        gap: 3,
-        alignItems: "center"
-    },
-    ratingText: {
-        fontWeight: 'bold'
     }
 })
