@@ -53,7 +53,7 @@ export default function Index() {
                     alignItems: "center",
                 }}
             >
-                <Text>Erro ao carregar produtos</Text>
+                <Text>Error loading Products. Please try again.</Text>
             </View>
         );
     }
