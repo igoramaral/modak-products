@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
     pageLayout:{
         padding: 10,
         flex: 1,
-        marginTop: 40,
-        marginBottom: 50
+        marginVertical: 10
     },
     container: {
         padding: 10,

@@ -59,7 +59,7 @@ export default function Index() {
     }
 
     return (
-        <View style={{ flex: 1, padding: 5 , marginTop: 40}}>
+        <View style={{ flex: 1, padding: 5 , marginVertical: 10}}>
             <FiltersBar 
                 categories={categories} 
                 selectedCategory={selectedCategory} 
