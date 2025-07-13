@@ -39,7 +39,7 @@ export default function Product() {
                     alignItems: "center",
                 }}
             >
-                return <ActivityIndicator size="large" />;
+                <ActivityIndicator size="large" />
             </View>
         );
     }
@@ -53,7 +53,7 @@ export default function Product() {
                     alignItems: "center",
                 }}
             >
-                <Text>Error loading Product. Please try again.</Text>;
+                <Text>Error loading Product. Please try again.</Text>
             </View>
         );
     }
