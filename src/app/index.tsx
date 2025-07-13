@@ -28,7 +28,7 @@ export default function Index() {
         error: errorCategories
     } = useCategories();
 
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
 
     if (loadingProducts || loadingCategories) {
         return (
@@ -59,7 +59,7 @@ export default function Index() {
     }
 
     return (
-        <View style={{ flex: 1, padding: 10 , marginTop: 20}}>
+        <View style={{ flex: 1, padding: 5 , marginTop: 40}}>
             <FiltersBar 
                 categories={categories} 
                 selectedCategory={selectedCategory} 
