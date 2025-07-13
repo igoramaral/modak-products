@@ -1,6 +1,11 @@
 import { useLocalSearchParams } from "expo-router";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import ImageCarousel from "../components/ImageCarousel";
+import ProductPrice from "../components/ProductDisplay/ProductPrice";
+import ProductRating from "../components/ProductDisplay/ProductRating";
+import ReviewDisplay from "../components/ReviewDisplay";
 import { useProduct } from "../hooks/useProduct";
+import styles from "./productStyles";
 
 export default function Product() {
     const { id } = useLocalSearchParams();
@@ -20,8 +25,43 @@ export default function Product() {
     }
 
     return(
-        <View>
-            <Text>{product?.title}</Text>
-        </View>
+        <ScrollView style={styles.pageLayout}>
+            <View style={styles.container}>
+                <Text style={styles.productTitle}>{product?.title}</Text>
+
+                <ImageCarousel images={product.images}/>
+
+                <View style={styles.ratingBrandRow}>
+                    <ProductRating rating={product.rating} />
+                    {product.brand && <Text style={styles.brandText}>Brand: {product.brand}</Text>}
+                </View>
+
+                <View style={styles.priceRow}>
+                    <ProductPrice value={product.price} smallerFontSize={20} biggerFontSize={34}/>
+                    { Math.floor(product.discountPercentage) > 0 && 
+                        <View>
+                            <Text style={styles.discountText}>({Math.floor(product.discountPercentage)}% OFF)</Text>
+                        </View>
+                    }
+                </View>
+
+                <View style={styles.priceRow}>
+                    
+                    <Text 
+                        style={ product.availabilityStatus === 'In Stock' ? styles.inStockText : styles.lowStockText}
+                    >
+                        {product.availabilityStatus}
+                    </Text>
+                    {product.stock > 0 && <Text style={styles.stockLeftText}>({product.stock} Left)</Text>}
+                </View>
+
+                <View style={styles.descriptionContainer}>
+                    <Text style={styles.descriptionTitle}>Description</Text>
+                    <Text style={styles.descriptionText}>{product.description}</Text>
+                </View>
+
+                <ReviewDisplay reviews={product.reviews}/>
+            </View>
+        </ScrollView>
     )
 }
