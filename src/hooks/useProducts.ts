@@ -23,7 +23,6 @@ export function useProducts() {
             setAllProducts(res.products);
         })
         .catch((err) => {
-            console.error(err);
             setError(err);
         })
         .finally(() => setLoading(false));

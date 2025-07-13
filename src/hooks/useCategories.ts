@@ -8,9 +8,10 @@ export function useCategories() {
 
     useEffect(() => {
         ProductService.getCategories()
-            .then((res) => setCategories(res))
+            .then((res) => {
+                setCategories(res)
+            })
             .catch((err) => {
-                console.error(err);
                 setError(err);
             })
             .finally(() => setLoading(false));
