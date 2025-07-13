@@ -13,7 +13,7 @@ export function useProduct(id: number | string){
         .then((res) => {
             setProduct(res);
         }).catch((err)=>{
-            setError(err);
+            setError(true);
         }).finally(()=>{
             setLoading(false);
         })
