@@ -14,12 +14,24 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.lightGrey
     },
+    backButton: {
+        flexDirection: "row",
+        paddingVertical: 10,
+        paddingRight: 20,
+        paddingLeft: 10,
+        alignItems: "center",
+        gap: 5
+    },
+    backButtonText: {
+        fontSize: 14,
+        color: Colors.greyText
+    },
     productTitle: {
         fontWeight: "600",
         fontSize: 26,
         padding: 10,
         marginHorizontal: 8,
-        marginVertical: 10,
+        marginBottom: 10,
         color: Colors.blackText
     },
     ratingBrandRow: {

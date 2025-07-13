@@ -1,5 +1,7 @@
-import { useLocalSearchParams } from "expo-router";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import Colors from "@/constants/Colors";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import ImageCarousel from "../components/ImageCarousel";
 import ProductPrice from "../components/ProductDisplay/ProductPrice";
 import ProductRating from "../components/ProductDisplay/ProductRating";
@@ -9,6 +11,8 @@ import styles from "./productStyles";
 
 export default function Product() {
     const { id } = useLocalSearchParams();
+
+    const router = useRouter();
 
     if (!id) {
         return <Text>Invalid Product</Text>;
@@ -27,6 +31,11 @@ export default function Product() {
     return(
         <ScrollView style={styles.pageLayout}>
             <View style={styles.container}>
+                <TouchableOpacity style={styles.backButton} onPress={router.back}>
+                    <Ionicons name="arrow-back-outline" size={30} color={Colors.strongGreen} />
+                    <Text style={styles.backButtonText}>Return to Products List</Text>
+                </TouchableOpacity>
+
                 <Text style={styles.productTitle}>{product?.title}</Text>
 
                 <ImageCarousel images={product.images}/>
