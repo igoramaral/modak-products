@@ -1,6 +1,6 @@
 import { Product } from '@/src/types/product';
 import React, { useRef } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Pagination from '../Pagination';
 import ProductCard from './ProductCard';
 
@@ -22,7 +22,7 @@ export default function ProductDisplay({products, viewMode, currentPage, setCurr
     };
 
     return (
-        <>
+        <View style={{flex: 1}}>
             <FlatList
                 ref={flatListRef}
                 data={products}
@@ -31,11 +31,10 @@ export default function ProductDisplay({products, viewMode, currentPage, setCurr
                 numColumns={viewMode === 'grid' ? 2 : 1}
                 key={viewMode}
                 contentContainerStyle={{
-                    gap: 8,
-                    padding: 8,
+                    padding: 2,
                 }}
                 columnWrapperStyle={
-                    viewMode === 'grid' ? { justifyContent: 'space-between' } : undefined
+                    viewMode === 'grid' ? { gap: 8 } : undefined
                 }
                 ListFooterComponent={
                     <Pagination 
@@ -45,6 +44,6 @@ export default function ProductDisplay({products, viewMode, currentPage, setCurr
                     />
                 }
             />
-        </>
+        </View>
     );
 }

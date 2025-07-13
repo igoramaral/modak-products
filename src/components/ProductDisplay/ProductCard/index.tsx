@@ -2,9 +2,14 @@ import Colors from '@/constants/Colors';
 import { Product } from '@/src/types/product';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ProductPrice from '../ProductPrice';
 import ProductRating from '../ProductRating';
+
+const screenWidth = Dimensions.get("window").width;
+const gap = 8;
+const numColumns = 2;
+const cardWidth = (screenWidth - gap * (numColumns + 1)) / numColumns;
 
 interface ProductCardProps {
     item: Product;
@@ -12,7 +17,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({item, viewMode}:ProductCardProps) {
-    const cardStyle = viewMode === 'grid' ? styles.gridCard : styles.listCard;
+    const cardStyle = viewMode === 'grid' ? [styles.gridCard, {width: cardWidth}] : styles.listCard;
     const router = useRouter();
 
     return (
@@ -22,7 +27,7 @@ export default function ProductCard({item, viewMode}:ProductCardProps) {
                     source={{ uri: item.thumbnail }}
                     style={styles.thumbnail}
                 />
-                <View>
+                <View style={viewMode === 'list' && {flex: 1}}>
                     <Text style={styles.productTitle}>
                         {item.title}
                     </Text>
@@ -46,19 +51,20 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 4,
         elevation: 2,
+        minHeight: 140
     },
     gridCard: {
-        width: '48%',
+        minHeight: 270,
         paddingVertical: 15,
         paddingHorizontal: 10,
-        marginBottom: 8,
+        marginBottom: gap,
         backgroundColor: Colors.lightGrey,
         borderRadius: 4,
         elevation: 2,
     },
     thumbnail: {
-        width: 90,
-        height: 90,
+        width: 100,
+        height: 100,
         marginRight: 8,
         borderRadius: 4,
         alignSelf: "center"
