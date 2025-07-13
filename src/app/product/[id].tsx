@@ -2,11 +2,11 @@ import Colors from "@/constants/Colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import ImageCarousel from "../components/ImageCarousel";
-import ProductPrice from "../components/ProductDisplay/ProductPrice";
-import ProductRating from "../components/ProductDisplay/ProductRating";
-import ReviewDisplay from "../components/ReviewDisplay";
-import { useProduct } from "../hooks/useProduct";
+import ImageCarousel from "../../components/ImageCarousel";
+import ProductPrice from "../../components/ProductDisplay/ProductPrice";
+import ProductRating from "../../components/ProductDisplay/ProductRating";
+import ReviewDisplay from "../../components/ReviewDisplay";
+import { useProduct } from "../../hooks/useProduct";
 import styles from "./productStyles";
 
 export default function Product() {
