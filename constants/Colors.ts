@@ -6,7 +6,8 @@ const Colors = {
     greyText: '#4A5352',
     greenText: '#74A29C',
     filterBackground: '#dddddd',
-    starColor: '#FF6200'
+    starColor: '#FF6200',
+    discountColor: '#CC0C39'
 }
 
 export default Colors;
