@@ -31,7 +31,12 @@ export default function Category() {
                     alignItems: "center",
                 }}
             >
-                <Text>Error loading Product. Please try again.</Text>
+                <Text>
+                    { error ?
+                    "Error loading Product. Please try again." :
+                    "Category not found. Please try again"
+                    }
+                </Text>
             </View>
         );
     }

@@ -15,17 +15,47 @@ export default function Product() {
     const router = useRouter();
 
     if (!id) {
-        return <Text>Invalid Product</Text>;
+        return (
+            <View 
+            style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Text>Invalid Product</Text>
+            </View>
+        );
     }
     const normalizedId = Array.isArray(id) ? id[0] : id;
     const { product, loading, error } = useProduct(normalizedId);
 
     if (loading) {
-        return <ActivityIndicator size="large" />;
+        return (
+            <View 
+            style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                return <ActivityIndicator size="large" />;
+            </View>
+        );
     }
 
     if (error || !product) {
-        return <Text>Error loading Product. Please try again.</Text>;
+        return (
+            <View 
+            style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Text>Error loading Product. Please try again.</Text>;
+            </View>
+        );
     }
 
     return(
