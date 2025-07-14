@@ -1,3 +1,4 @@
+import TopBar from "@/src/components/TopBar";
 import { useCategories } from "@/src/hooks/useCategories";
 import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, Text, View } from "react-native";
@@ -41,6 +42,10 @@ export default function Category() {
         );
     }
     return (
-        <ProductList initialCategory={normalizedCategory}/>
+        <View style={{flex: 1}}>
+            <TopBar title="Products" />
+            <ProductList initialCategory={normalizedCategory}/>
+        </View>
+        
     )
 }

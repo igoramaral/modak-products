@@ -1,7 +1,11 @@
 import Colors from "@/constants/Colors";
+import TopBar from "@/src/components/TopBar";
+import { useCart } from "@/src/context/cartContext";
+import { Product } from "@/src/types/product";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Notifications from "expo-notifications";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import ImageCarousel from "../../components/ImageCarousel";
 import ProductPrice from "../../components/ProductDisplay/ProductPrice";
 import ProductRating from "../../components/ProductDisplay/ProductRating";
@@ -9,10 +13,29 @@ import ReviewDisplay from "../../components/ReviewDisplay";
 import { useProduct } from "../../hooks/useProduct";
 import styles from "./productStyles";
 
-export default function Product() {
+export default function ProductPage() {
     const { id } = useLocalSearchParams();
+    const { addProduct } = useCart();
 
     const router = useRouter();
+
+    async function scheduleReminder(product:Product) {
+
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: "Don't forget!",
+                body: `Check out ${product.title} again!`,
+                data: { url: `/product/${product.id}`}, 
+            },
+            trigger: {
+                type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+                seconds: 20,
+                repeats: false,
+            }
+        });
+
+        console.log('Reminder created for product ' + product.id);
+    }
 
     if (!id) {
         return (
@@ -58,9 +81,24 @@ export default function Product() {
         );
     }
 
+    const showReminderSuccessfullAlert = () => {
+        Alert.alert(
+            "Reminder set",
+            `You will be reminded soon to check the product!`,
+            [
+                {
+                text: "Ok",
+                onPress: () => scheduleReminder(product),
+                },
+            ],
+            { cancelable: false }
+        )
+    }
+
     return(
         <ScrollView style={styles.pageLayout}>
             <View style={styles.container}>
+                <TopBar title="Product" />
                 <TouchableOpacity style={styles.backButton} onPress={router.back}>
                     <Ionicons name="arrow-back-outline" size={30} color={Colors.strongGreen} />
                     <Text style={styles.backButtonText}>Return to Products List</Text>
@@ -94,20 +132,15 @@ export default function Product() {
                     {product.stock > 0 && <Text style={styles.stockLeftText}>({product.stock} Left)</Text>}
                 </View>
 
-                {/*Uncoment to enable Add Reminder button. addProductReminder isn't working.*/}
-                {/* <Button 
-                    icon="calendar" 
-                    mode="outlined"
-                    buttonColor={Colors.strongGreen}
-                    onPress={()=>{
-                        addProductReminder(product.title, new Date(), new Date(Date.now() + 60*60*1000))
-                        .catch((err)=>{
-                            Alert.alert("Error", err.message);
-                        })
-                    }}
-                > 
-                    Add Reminder
-                </Button> */}
+                <TouchableOpacity style={styles.remindButton} onPress={()=>{addProduct(product, 1)}}>
+                    <Ionicons name="cart" size={24} color={Colors.lightGrey} />
+                    <Text style={styles.remindButtonText}>Add to Cart</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.remindButton} onPress={showReminderSuccessfullAlert}>
+                    <Ionicons name="notifications-sharp" size={24} color={Colors.lightGrey} />
+                    <Text style={styles.remindButtonText}>Add Reminder</Text>
+                </TouchableOpacity>                    
 
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionTitle}>Description</Text>
@@ -118,4 +151,8 @@ export default function Product() {
             </View>
         </ScrollView>
     )
+}
+
+function useCartContext(): { addProduct: any; } {
+    throw new Error("Function not implemented.");
 }
