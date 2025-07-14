@@ -22,7 +22,7 @@ export default function ProductCard({item, viewMode}:ProductCardProps) {
 
     return (
         <View>
-            <TouchableOpacity style={cardStyle} onPress={() => router.push(`/${item.id}`)}>
+            <TouchableOpacity style={cardStyle} onPress={() => router.push(`/product/${item.id}`)}>
                 <Image
                     source={{ uri: item.thumbnail }}
                     style={styles.thumbnail}

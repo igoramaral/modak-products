@@ -1,87 +1,18 @@
-import { useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
-import DisplayOptionsBar from "../components/DisplayOptionsBar";
-import FiltersBar from "../components/FiltersBar";
-import ProductDisplay from "../components/ProductDisplay";
-import { useCategories } from "../hooks/useCategories";
-import { useProducts } from "../hooks/useProducts";
+import { View } from "react-native";
+import ProductList from "../components/ProductList";
+import TopBar from "../components/TopBar";
+import { useNotification } from "../context/notificationContext";
 
 export default function Index() {
-    const {
-        products,
-        loading: loadingProducts,
-        error: errorProducts,
-        selectedCategory,
-        setSelectedCategory,
-        sortBy,
-        setSortBy,
-        sortDirection,
-        setSortDirection,
-        currentPage,
-        setCurrentPage,
-        totalPages
-    } = useProducts();
 
-    const {
-        categories,
-        loading: loadingCategories,
-        error: errorCategories
-    } = useCategories();
-
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
-
-    if (loadingProducts || loadingCategories) {
-        return (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <ActivityIndicator size="large" />
-            </View>
-        );
-    }
-
-    if (errorProducts || errorCategories) {
-        return (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <Text>Error loading Products. Please try again.</Text>
-            </View>
-        );
-    }
+    const { expoPushToken } = useNotification();
+    console.log(expoPushToken);
 
     return (
-        <View style={{ flex: 1, padding: 5 , marginVertical: 10}}>
-            <FiltersBar 
-                categories={categories} 
-                selectedCategory={selectedCategory} 
-                setSelectedCategory={setSelectedCategory} 
-            />
-
-            <DisplayOptionsBar
-                sortBy={sortBy} 
-                setSortBy={setSortBy} 
-                sortDirection={sortDirection} 
-                setSortDirection={setSortDirection}
-                viewMode={viewMode}
-                setViewMode={setViewMode}
-            />
-            
-            <ProductDisplay 
-                viewMode={viewMode} 
-                products={products}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPages={totalPages} 
-            />
+        <View style={{flex: 1}}>
+            <TopBar title="Products" />
+            <ProductList />
         </View>
-    );
+        
+    )
 }

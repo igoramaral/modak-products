@@ -3,9 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     pageLayout:{
-        padding: 10,
         flex: 1,
-        marginVertical: 10
     },
     container: {
         padding: 10,
@@ -82,6 +80,23 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontSize: 16,
         color: Colors.greyText
+    },
+    remindButton:{
+        alignSelf: "center",
+        flexDirection: "row",
+        gap: 5,
+        width: "90%",
+        backgroundColor: Colors.strongGreen,
+        padding: 10,
+        borderRadius: 30,
+        marginVertical: 10,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    remindButtonText:{
+        fontSize: 18,
+        color: Colors.lightGrey,
+        fontWeight: '500'
     }
 })
 
