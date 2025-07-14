@@ -94,6 +94,21 @@ export default function Product() {
                     {product.stock > 0 && <Text style={styles.stockLeftText}>({product.stock} Left)</Text>}
                 </View>
 
+                {/*Uncoment to enable Add Reminder button. addProductReminder isn't working.*/}
+                {/* <Button 
+                    icon="calendar" 
+                    mode="outlined"
+                    buttonColor={Colors.strongGreen}
+                    onPress={()=>{
+                        addProductReminder(product.title, new Date(), new Date(Date.now() + 60*60*1000))
+                        .catch((err)=>{
+                            Alert.alert("Error", err.message);
+                        })
+                    }}
+                > 
+                    Add Reminder
+                </Button> */}
+
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionTitle}>Description</Text>
                     <Text style={styles.descriptionText}>{product.description}</Text>

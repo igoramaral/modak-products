@@ -10,7 +10,6 @@ web-build/
 expo-env.d.ts
 
 # Native
-android/
 .kotlin/
 *.orig.*
 *.jks
@@ -38,3 +37,5 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+modak-products-firebase-adminsdk-fbsvc-a98c4e224e.json
