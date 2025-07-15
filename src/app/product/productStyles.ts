@@ -81,12 +81,34 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Colors.greyText
     },
+    buttonContainer:{
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    addToCartButton:{
+        alignSelf: "center",
+        flexDirection: "row",
+        gap: 5,
+        flex: 1,
+        backgroundColor: Colors.strongGreen,
+        padding: 10,
+        borderRadius: 30,
+        marginVertical: 10,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    addToCartButtonText:{
+        fontSize: 18,
+        color: Colors.lightGrey,
+        fontWeight: '500'
+    },
     remindButton:{
         alignSelf: "center",
         flexDirection: "row",
         gap: 5,
-        width: "90%",
-        backgroundColor: Colors.strongGreen,
+        borderColor: Colors.strongGreen,
+        borderWidth: 2,
+        marginLeft: 10,
         padding: 10,
         borderRadius: 30,
         marginVertical: 10,
@@ -95,7 +117,7 @@ const styles = StyleSheet.create({
     },
     remindButtonText:{
         fontSize: 18,
-        color: Colors.lightGrey,
+        color: Colors.strongGreen,
         fontWeight: '500'
     }
 })

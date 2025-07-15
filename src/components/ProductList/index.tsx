@@ -16,7 +16,7 @@ export default function ProductList({ initialCategory }:ProductListParams) {
         loading: loadingProducts,
         error: errorProducts,
         selectedCategory,
-        setSelectedCategory,
+        setCategories,
         sortBy,
         setSortBy,
         sortDirection,
@@ -33,7 +33,7 @@ export default function ProductList({ initialCategory }:ProductListParams) {
     } = useCategories();
 
     useEffect(() => {
-        if (initialCategory) setSelectedCategory(initialCategory);
+        if (initialCategory) setCategories(initialCategory);
     }, [initialCategory]);
 
     const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
@@ -71,7 +71,7 @@ export default function ProductList({ initialCategory }:ProductListParams) {
             <FiltersBar 
                 categories={categories} 
                 selectedCategory={selectedCategory} 
-                setSelectedCategory={setSelectedCategory} 
+                setSelectedCategory={setCategories} 
             />
 
             <DisplayOptionsBar
