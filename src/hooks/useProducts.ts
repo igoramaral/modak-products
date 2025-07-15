@@ -11,7 +11,7 @@ export function useProducts() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
     const [sortBy, setSortBy] = useState<'price' | 'rating' | null>(null);
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
@@ -40,8 +40,8 @@ export function useProducts() {
     function filterSortAndPaginate() {
         let filtered = [...allProducts];
 
-        if (selectedCategory) {
-        filtered = filtered.filter((p) => p.category === selectedCategory);
+        if (selectedCategory.length > 0) {
+            filtered = filtered.filter((p) => selectedCategory.includes(p.category));
         }
 
         if (sortBy) {
@@ -70,12 +70,20 @@ export function useProducts() {
         setDisplayedProducts(filtered.slice(start, end));
     }
 
+    function setCategories(category:string) {
+        setSelectedCategory(prev => {
+            return prev.includes(category)
+                ? prev.filter(item => item !== category)
+                : [...prev, category]
+        })
+    }
+
     return {
         products: displayedProducts,
         loading,
         error,
         selectedCategory,
-        setSelectedCategory,
+        setCategories,
         sortBy,
         setSortBy,
         sortDirection,

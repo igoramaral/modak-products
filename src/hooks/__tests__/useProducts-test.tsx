@@ -161,7 +161,7 @@ describe("useProducts", () => {
         await waitFor(() => expect(hookResult).not.toBeNull());
 
         await act(()=> {
-            hookResult!.setSelectedCategory('x');
+            hookResult!.setCategories('x');
         })
         
         await waitFor(() => {
@@ -180,7 +180,7 @@ describe("useProducts", () => {
         await waitFor(() => expect(hookResult).not.toBeNull());
 
         await act(()=>{
-            hookResult!.setSelectedCategory('x');
+            hookResult!.setCategories('x');
             hookResult!.setSortBy('price');
             hookResult!.setSortDirection('desc');
         })
