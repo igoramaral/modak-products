@@ -3,6 +3,7 @@ import TopBar from "@/src/components/TopBar";
 import { useCart } from "@/src/context/cartContext";
 import { Product } from "@/src/types/product";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as Notifications from "expo-notifications";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -132,15 +133,18 @@ export default function ProductPage() {
                     {product.stock > 0 && <Text style={styles.stockLeftText}>({product.stock} Left)</Text>}
                 </View>
 
-                <TouchableOpacity style={styles.remindButton} onPress={()=>{addProduct(product, 1)}}>
-                    <Ionicons name="cart" size={24} color={Colors.lightGrey} />
-                    <Text style={styles.remindButtonText}>Add to Cart</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.addToCartButton} onPress={()=>{addProduct(product, 1)}}>
+                        <Ionicons name="cart" size={24} color={Colors.lightGrey} />
+                        <Text style={styles.addToCartButtonText}>Add to Cart</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.remindButton} onPress={showReminderSuccessfullAlert}>
-                    <Ionicons name="notifications-sharp" size={24} color={Colors.lightGrey} />
-                    <Text style={styles.remindButtonText}>Add Reminder</Text>
-                </TouchableOpacity>                    
+                    <TouchableOpacity style={styles.remindButton} onPress={showReminderSuccessfullAlert}>
+                        <MaterialIcons name="notification-add" size={24} color={Colors.strongGreen} />
+                        <Text style={styles.remindButtonText}>Reminder</Text>
+                    </TouchableOpacity>    
+                </View>
+                                
 
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionTitle}>Description</Text>
@@ -151,8 +155,4 @@ export default function ProductPage() {
             </View>
         </ScrollView>
     )
-}
-
-function useCartContext(): { addProduct: any; } {
-    throw new Error("Function not implemented.");
 }
