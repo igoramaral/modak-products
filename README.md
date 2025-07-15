@@ -112,7 +112,7 @@ These features were not mandatory, but were added to enhance usability of the pr
 
 ## Usage
 
-You will need a development build installed on a real device for running the app. Simply running with Expo Go wont help, because it cannot handle Deep Linking and Notifications correctly. You may find a development build [here](https://expo.dev/accounts/igoramaral/projects/modak-products/builds/78fca733-a98b-4dc5-bf6a-b45694bbc8f3).
+You will need a development build installed on a real device for running the app. Simply running with Expo Go wont help, because it cannot handle Deep Linking and Notifications correctly. You may find the development build on the [releases](https://github.com/igoramaral/modak-products/releases/tag/v1.0.0) session of the repo, or in the expo build page [here](https://expo.dev/accounts/igoramaral/projects/modak-products/builds/d5ec72b4-aad4-43ba-a8f6-b8892a3490a2).
 
 Once downloaded and installed on your real device, start the Development Server with the instructions provided on [Installation](#installation). Once the server is up and running, open the app on your phone. You should see the development server on the app. If you don't, try reopening the app. Once the development server is selected, the app will bundle and start.
 
